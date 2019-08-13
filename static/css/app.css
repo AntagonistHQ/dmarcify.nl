@@ -1,0 +1,128 @@
+/*
+ * {"sidebarBg":"#f6f6f6"
+"sidebarText":"#555"
+"sidebarUnreadText":"#ec008c"
+"sidebarTextHoverBg":"#e0e0e0"
+"sidebarTextActiveBorder":"#66cccc"
+"sidebarTextActiveColor":"#594545"
+"sidebarHeaderBg":"#001f56"
+"sidebarHeaderTextColor":"#fff"
+"onlineIndicator":"#28c942"
+"awayIndicator":"#ffbd2d"
+"dndIndicator":"#ff6058"
+"mentionBj":"#ffffff"
+"mentionColor":"#ffffff"
+"centerChannelBg":"#fff"
+"centerChannelColor":"#555"
+"newMessageSeparator":"#ec008c"
+"linkColor":"#ec008c"
+"buttonBg":"#ec008c"
+"buttonColor":"#ffffff"
+"errorTextColor":"#fd5960"
+"mentionHighlightBg":"#ec008c"
+"mentionHighlightLink":"#ffffff"
+"codeTheme":"github"
+"mentionBg":"#ec008c"} */
+
+.uk-h1, .uk-h2, .uk-h3, .uk-h4, .uk-h5, .uk-h6, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.uk-link, a {
+    color: #00a9e1;
+}
+
+.uk-tab>.uk-active>a {
+    border-color: #00a9e1;
+}
+
+.uk-radio:checked {
+    background-color: #00a9e1;
+}
+
+:not(pre)>code {
+    color: #ec008c;
+}
+
+html{
+    /* background-image: url('/static/img/dust_scratches.png'); */
+    background-color: #f7f7f7;
+}
+
+#app {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#app pre {
+    background-color: #f7f7f7;
+    border-radius: 0;
+}
+
+#app dt:target {
+    color: #1e87f0;
+    font-weight: bold;
+}
+
+#app h1 {
+    color: #aaa;
+    font-size: 3em;
+    text-shadow: 0 1px 0 #fff;
+}
+
+#app h1 .dmarc-title {
+    color: #ec008c;
+    font-weight: 700;
+}
+
+#app h1 img {
+    height: 1em;
+    margin-right: 20px;
+    width: auto;
+}
+
+.dmarc-poweredby,
+.dmarc-github {
+    display: inline-block;
+    color: #aaa;
+    text-shadow: 0 1px 0 #fff;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: 700;
+}
+
+.dmarc-poweredby img,
+.dmarc-github img {
+    height: 2.5em;
+    vertical-align: middle;
+}
+
+.dmarc-github {
+    float: right;
+}
+
+.dmarc-github img {
+    float: right;
+    margin-top: 5px;
+}
+
+.help {
+    background-color: #00a9e1;
+    color: #fff;
+    font-size: 0.8em;
+    padding: 1em 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.help h3 {
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.help p {
+    margin: 0;
+}

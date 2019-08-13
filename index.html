@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DMARCify - DMARC Policy Builder</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="/static/img/favicon.png" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="/static/css/uikit.min.css" />
+    <link rel="stylesheet" href="/static/css/app.css" />
+
+    <script src="/static/js/js.cookie.js"></script>
+    <script src="/static/js/vue.min.js"></script>
+    <script src="/static/js/uikit.min.js" defer></script>
+    <script src="/static/js/uikit-icons.min.js" defer></script>
+</head>
+<body>
+<div id="app">
+<div class="uk-container uk-container-xsmall">
+
+<h1><img src="/static/img/favicon.png" alt="" /><span class="dmarc-title">DMARC</span>ify</h1>
+
+<div class="uk-margin">
+    <div uk-form-custom="target: > * > span:first-child">
+        <select v-model="lang" v-on:change="translate(lang)">
+            <option value="nl">Nederlands</option>
+            <option value="en">English</option>
+        </select>
+        <button class="uk-button uk-button-default" type="button" tabindex="-1">
+            <span></span>
+            <span uk-icon="icon: chevron-down"></span>
+        </button>
+    </div>
+</div>
+
+<p>{{ text.header }}</p>
+
+<hr>
+
+
+<div class="uk-card uk-card-default uk-card-body">
+
+<ul uk-tab="connect: .dmarc-tabs">
+    <li class="uk-active"><a href="#">{{ text.tab_general }}</a></li>
+    <li><a href="#">{{ text.tab_aggregate }}</a></li>
+    <li><a href="#">{{ text.tab_failure }}</a></li>
+    <li><a href="#">{{ text.tab_result }}</a></li>
+</ul>
+
+<form class="uk-form-stacked">
+
+<ul class="uk-switcher dmarc-tabs">
+<li>
+    <div class="uk-margin">
+        <label class="uk-form-label" for="dmarc-policy">
+            {{ text.p_p }}
+            <!-- <a href="#" uk-icon="icon: info; ratio: 0.6" v-on:click="showHelp('p')"></a> -->
+        </label>
+
+        <div class="uk-form-controls">
+            <select class="uk-select" id="dmarc-policy" v-model="p" v-on:change="update">
+                <option value="none">{{ text.p_p_none }}</option>
+                <option value="quarantine">{{ text.p_p_quarantine }}</option>
+                <option value="reject">{{ text.p_p_reject }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="dmarc-subdomain-policy">
+            {{ text.p_sp }}
+        </label>
+        <div class="uk-form-controls">
+            <select class="uk-select" id="dmarc-subdomain-policy" v-model="sp" v-on:change="update">
+                <option value="same">{{ text.p_sp_same }}</option>
+                <option value="none">{{ text.p_p_none }}</option>
+                <option value="quarantine">{{ text.p_p_quarantine }}</option>
+                <option value="reject">{{ text.p_p_reject }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="dmarc-percentage">
+            {{ text.p_pct }}
+        </label>
+        <div class="uk-form-controls">
+            <input id="dmarc-percentage" class="uk-range" v-model="pct" type="range" min="0" max="100" step="1" v-on:change="update">
+            <i>{{ pct }}%</i>
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="dmarc-aspf">
+            {{ text.p_aspf }}
+        </label>
+        <div class="uk-form-controls">
+            <label><input class="uk-radio" type="radio" v-model="aspf" value="r" v-on:change="update"> {{ text.p_a_relaxed }}</label>
+            <label><input class="uk-radio" type="radio" v-model="aspf" value="s" v-on:change="update"> {{ text.p_a_strict }}</label>
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="dmarc-adkim">
+            {{ text.p_adkim }}
+        </label>
+        <div class="uk-form-controls">
+            <label><input class="uk-radio" type="radio" v-model="adkim" value="r" v-on:change="update"> {{ text.p_a_relaxed }}</label>
+            <label><input class="uk-radio" type="radio" v-model="adkim" value="s" v-on:change="update"> {{ text.p_a_strict }}</label>
+        </div>
+    </div>
+
+</li>
+<li>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="dmarc-rua" v-model="rua">
+            {{ text.p_rua }}
+        </label>
+        <div class="uk-form-controls">
+            <input id="dmarc-rua" class="uk-input" v-model="rua" type="email" v-on:change="update" placeholder="dmarc-aggregate@example.com">
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="dmarc-ri" v-model="ri">
+            {{ text.p_ri }}
+        </label>
+        <div class="uk-form-controls">
+            <select class="uk-select" id="dmarc-ri" v-model="ri" v-on:change="update" v-bind:disabled="rua === ''">
+                <option value="3600">1 {{ text.w_hour }}</option>
+                <option value="7200">2 {{ text.w_hours }}</option>
+                <option value="14400">4 {{ text.w_hours }}</option>
+                <option value="28800">8 {{ text.w_hours }}</option>
+                <option value="43200">12 {{ text.w_hours }}</option>
+                <option value="86400">1 {{ text.w_day }}</option>
+            </select>
+        </div>
+    </div>
+
+</li>
+<li>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="dmarc-ruf" v-model="ruf">
+          {{ text.p_ruf }}
+        </label>
+        <div class="uk-form-controls">
+            <input id="dmarc-ruf" class="uk-input" v-model="ruf" type="email" v-on:change="update" placeholder="dmarc-failure@example.com">
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="dmarc-fo">{{ text.p_fo }}</label>
+        <div class="uk-form-controls">
+            <label><input class="uk-checkbox" type="checkbox" v-model="fo" value="0" v-on:change="update" v-bind:disabled="ruf === ''"> {{ text.p_fo_all }}</label><br>
+            <label><input class="uk-checkbox" type="checkbox" v-model="fo" value="1" v-on:change="update" v-bind:disabled="ruf === ''"> {{ text.p_fo_any }}</label><br>
+            <label><input class="uk-checkbox" type="checkbox" v-model="fo" value="d" v-on:change="update" v-bind:disabled="ruf === ''"> {{ text.p_fo_dkim }}<br>
+            <label><input class="uk-checkbox" type="checkbox" v-model="fo" value="s" v-on:change="update" v-bind:disabled="ruf === ''"> {{ text.p_fo_spf }}</label>
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="dmarc-rf">{{ text.p_rf }}</label>
+        <div class="uk-form-controls">
+            <label><input class="uk-checkbox" type="checkbox" v-model="rf" value="afrf" v-on:change="update" v-bind:disabled="ruf === ''"> <strong>AFRF</strong> &ndash; {{ text.p_rf_afrf }}</label><br>
+            <label><input class="uk-checkbox" type="checkbox" v-model="rf" value="iodef" v-on:change="update" v-bind:disabled="ruf === ''"> <strong>IODEF</strong> &ndash; {{ text.p_rf_iodef }}</label><br>
+        </div>
+    </div>
+
+</li>
+<li>
+    <div class="uk-margin">
+        <p>{{ text.result }}</p>
+
+        <hr>
+
+        <pre>{{ dmarc }}</pre>
+        <a href="#" class="uk-button uk-button-default uk-float-right dmarc-copy" v-on:click="copy"><span uk-icon="copy"></span> {{ text.w_copy }}</a>
+    </div>
+</li>
+</ul>
+
+
+</form>
+</div>
+
+<hr>
+
+<p class="dmarc-poweredby">
+    Hosted by <br>
+    <a href="https://www.antagonist.nl/?utm_source=logo&utm_medium=dmarcify&utm_campaign=help"><img alt="Antagonist" src="/static/img/antagonist.png" /></a>
+</p>
+
+<p class="dmarc-github">
+    Code on <br>
+    <a href="https://github.com/reening/dmarcify.nl"><img alt="GitHub" src="/static/img/github.png" /></a>
+</p>
+
+</div>
+
+<!--
+<div id="help" class="help">
+    <div class="uk-container uk-container-xsmall">
+        <h3>{{ text.help[help].title }}</h3>
+        <a href="#" class="uk-notification-close uk-close uk-icon" uk-icon="close"></span></a>
+        <p>{{ text.help[help].description }}</p>
+    </div>
+</div>
+-->
+
+</div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
