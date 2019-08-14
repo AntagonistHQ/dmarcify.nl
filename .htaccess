@@ -1,0 +1,7 @@
+Header add X-Frame-Options "DENY"
+Header add X-Content-Type-Options "nosniff"
+Header add X-XSS-Protection "1; mode=block"
+Header add Referrer-Policy "strict-origin"
+
+RewriteCond %{HTTP_HOST} ^www\.dmarcify\.nl [NC]
+RewriteRule ^(.*)$ http://dmarcify.nl/$1 [L,R=301]
