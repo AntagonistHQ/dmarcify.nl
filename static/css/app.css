@@ -76,7 +76,7 @@ html{
 }
 
 #app h1 img {
-    height: 1em;
+    height: 1.2em;
     margin-right: 20px;
     width: auto;
 }
@@ -125,4 +125,8 @@ html{
 
 .help p {
     margin: 0;
+}
+
+.dmarc-language {
+    background-color: #fff;
 }

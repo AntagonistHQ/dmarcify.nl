@@ -4,6 +4,8 @@
     <title>DMARCify - DMARC Policy Builder</title>
 
     <meta charset="utf-8">
+    <meta name="description" content="Bouw een geschikte geschikte policy voor je domein met deze DMARC Policy Builder. Kies je policy, bepaal wat met subdomeinen moet gebeuren en klaar!">
+    <meta name="keywords" content="dmarc,dmarcify,mail,dkim,spf">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/png" href="/static/img/favicon.png" />
@@ -25,7 +27,7 @@
 <h1><span class="dmarc-title">DMARC</span>ify <img src="/static/img/favicon.png" alt="" /></h1>
 
 <div class="uk-margin">
-    <div uk-form-custom="target: > * > span:first-child">
+    <div uk-form-custom="target: > * > span:first-child" class="dmarc-language">
         <select v-model="lang" v-on:change="translate(lang)">
             <option value="nl">Nederlands</option>
             <option value="en">English</option>
