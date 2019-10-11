@@ -29,15 +29,15 @@
 }
 
 .uk-link, a {
-    color: #00a9e1;
+    color: #1e87f0;
 }
 
 .uk-tab>.uk-active>a {
-    border-color: #00a9e1;
+    border-color: #1e87f0;
 }
 
 .uk-radio:checked {
-    background-color: #00a9e1;
+    background-color: #1e87f0;
 }
 
 :not(pre)>code {
@@ -107,7 +107,7 @@ html{
 }
 
 .help {
-    background-color: #00a9e1;
+    background-color: #1e87f0;
     color: #fff;
     font-size: 0.8em;
     padding: 1em 0;
