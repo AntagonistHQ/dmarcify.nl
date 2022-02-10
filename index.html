@@ -184,7 +184,7 @@
 <li>
     <div class="uk-margin">
         <p>{{ text.result }}</p>
-
+        <div class="uk-alert uk-alert-warning" v-if="reporting_domain !== ''">{{ text.ruf_rua_warning }} <strong>{{ reporting_domain }}</strong></div>
         <hr>
 
         <pre>{{ dmarc }}</pre>

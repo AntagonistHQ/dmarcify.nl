@@ -28,6 +28,7 @@
     "p_rf": "Rapport-formaat",
     "p_rf_afrf": "X-ARF-formaat",
     "p_rf_iodef": "XML-formaat",
+    "ruf_rua_warning": "Let op: het TXT record hieronder is alleen geldig voor",
     "w_copy": "kopiëren",
     "w_hour": "uur",
     "w_hours": "uur",
