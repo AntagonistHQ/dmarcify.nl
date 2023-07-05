@@ -64,10 +64,23 @@
 <ul class="uk-switcher dmarc-tabs">
 <li>
     <div class="uk-margin">
-        <label class="uk-form-label" for="dmarc-policy">
-            {{ text.p_p }}
-            <!-- <a href="#" uk-icon="icon: info; ratio: 0.6" v-on:click="showHelp('p')"></a> -->
+        <label class="uk-form-label uk-text-bold" for="dmarc-policy">
+            {{ text.p_p }} <a href="#policy" class="uk-icon-link" uk-icon="icon: question; ratio: .75" uk-toggle></a>
+            <!-- <a href="#" uk-icon="icon: question; ratio: 0.6" v-on:click="showHelp('p')"></a> -->
         </label>
+        <div id="policy" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">{{ text.p_p }}</h2>
+                <hr>
+                <p>{{ text.p_p_tip }} <a href="https://www.antagonist.nl/blog/dmarcify/#policy-kiezen" target="blank">{{ text.p_p_tip_blog }}</a>.</p> 
+                <ul>
+                    <li><span class="uk-text-bold">{{ text.p_p_none }}:</span> {{ text.p_p_tip_none }}</li>
+                    <li><span class="uk-text-bold">{{ text.p_p_quarantine }}:</span> {{ text.p_p_tip_quarantine }}</li>
+                    <li><span class="uk-text-bold">{{ text.p_p_reject }}:</span> {{ text.p_p_tip_reject }}</li>
+                </ul>
+            </div>
+        </div>
 
         <div class="uk-form-controls">
             <select class="uk-select" id="dmarc-policy" v-model="p" v-on:change="update">
@@ -79,9 +92,17 @@
     </div>
 
     <div class="uk-margin">
-        <label class="uk-form-label" for="dmarc-subdomain-policy">
-            {{ text.p_sp }}
+        <label class="uk-form-label uk-text-bold" for="dmarc-subdomain-policy">
+            {{ text.p_sp }} <a href="#subdomain" class="uk-icon-link" uk-icon="icon: question; ratio: .75" uk-toggle></a>
         </label>
+        <div id="subdomain" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">{{ text.p_sp }}</h2>
+                <hr>
+                <p>{{ text.p_sp_tip }}</p>
+            </div>
+        </div>
         <div class="uk-form-controls">
             <select class="uk-select" id="dmarc-subdomain-policy" v-model="sp" v-on:change="update">
                 <option value="same">{{ text.p_sp_same }}</option>
@@ -93,9 +114,17 @@
     </div>
 
     <div class="uk-margin">
-        <label class="uk-form-label" for="dmarc-percentage">
-            {{ text.p_pct }}
+        <label class="uk-form-label uk-text-bold" for="dmarc-percentage">
+            {{ text.p_pct }} <a href="#pct" class="uk-icon-link" uk-icon="icon: question; ratio: .75" uk-toggle></a>
         </label>
+        <div id="pct" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">{{ text.p_pct }}</h2>
+                <hr>
+                <p>{{ text.p_pct_tip }}</p>
+            </div>
+        </div>
         <div class="uk-form-controls">
             <input id="dmarc-percentage" class="uk-range" v-model="pct" type="range" min="0" max="100" step="1" v-on:change="update">
             <i>{{ pct }}%</i>
@@ -103,9 +132,21 @@
     </div>
 
     <div class="uk-margin">
-        <label class="uk-form-label" for="dmarc-aspf">
-            {{ text.p_aspf }}
+        <label class="uk-form-label uk-text-bold" for="dmarc-aspf">
+            {{ text.p_aspf }} <a href="#spf" class="uk-icon-link" uk-icon="icon: question; ratio: .75" uk-toggle></a>
         </label>
+        <div id="spf" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">{{ text.p_aspf }}</h2>
+                <hr>
+                <p>{{ text.p_aspf_tip }}</p>
+                <ul>
+                    <li><span class="uk-text-bold">{{ text.p_a_relaxed }}:</span> {{ text.p_aspf_relaxed }}</li>
+                    <li><span class="uk-text-bold">{{ text.p_a_strict }}:</span> {{ text.p_aspf_strict }}</li>
+                </ul>
+            </div>
+        </div>
         <div class="uk-form-controls">
             <label><input class="uk-radio" type="radio" v-model="aspf" value="r" v-on:change="update"> {{ text.p_a_relaxed }}</label>
             <label><input class="uk-radio" type="radio" v-model="aspf" value="s" v-on:change="update"> {{ text.p_a_strict }}</label>
@@ -113,9 +154,21 @@
     </div>
 
     <div class="uk-margin">
-        <label class="uk-form-label" for="dmarc-adkim">
-            {{ text.p_adkim }}
+        <label class="uk-form-label uk-text-bold" for="dmarc-adkim">
+            {{ text.p_adkim }} <a href="#dkim" class="uk-icon-link" uk-icon="icon: question; ratio: .75" uk-toggle></a>
         </label>
+        <div id="dkim" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">{{ text.p_adkim }}</h2>
+                <hr>
+                <p>{{ text.p_aspf_tip }}</p>
+                <ul>
+                    <li><span class="uk-text-bold">{{ text.p_a_relaxed }}:</span> {{ text.p_adkim_relaxed }}</li>
+                    <li><span class="uk-text-bold">{{ text.p_a_strict }}:</span> {{ text.p_adkim_strict }}</li>
+                </ul>
+            </div>
+        </div>
         <div class="uk-form-controls">
             <label><input class="uk-radio" type="radio" v-model="adkim" value="r" v-on:change="update"> {{ text.p_a_relaxed }}</label>
             <label><input class="uk-radio" type="radio" v-model="adkim" value="s" v-on:change="update"> {{ text.p_a_strict }}</label>
@@ -126,18 +179,34 @@
 <li>
 
     <div class="uk-margin">
-        <label class="uk-form-label" for="dmarc-rua" v-model="rua">
-            {{ text.p_rua }}
+        <label class="uk-form-label uk-text-bold" for="dmarc-rua" v-model="rua">
+            {{ text.p_rua }} <a href="#rua" class="uk-icon-link" uk-icon="icon: question; ratio: .75" uk-toggle></a>
         </label>
+        <div id="rua" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">{{ text.p_rua }}</h2>
+                <hr>
+                <p>{{ text.p_rua_tip }}</p>
+            </div>
+        </div>
         <div class="uk-form-controls">
             <input id="dmarc-rua" class="uk-input" v-model="rua" type="email" v-on:change="update" placeholder="dmarc-aggregate@example.com">
         </div>
     </div>
 
     <div class="uk-margin">
-        <label class="uk-form-label" for="dmarc-ri" v-model="ri">
-            {{ text.p_ri }}
+        <label class="uk-form-label uk-text-bold" for="dmarc-ri" v-model="ri">
+            {{ text.p_ri }} <a href="#ri" class="uk-icon-link" uk-icon="icon: question; ratio: .75" uk-toggle></a>
         </label>
+        <div id="ri" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">{{ text.p_ri }}</h2>
+                <hr>
+                <p>{{ text.p_ri_tip }}</p>
+            </div>
+        </div>
         <div class="uk-form-controls">
             <select class="uk-select" id="dmarc-ri" v-model="ri" v-on:change="update" v-bind:disabled="rua === ''">
                 <option value="3600">1 {{ text.w_hour }}</option>
@@ -154,16 +223,38 @@
 <li>
 
     <div class="uk-margin">
-        <label class="uk-form-label" for="dmarc-ruf" v-model="ruf">
-          {{ text.p_ruf }}
+        <label class="uk-form-label uk-text-bold" for="dmarc-ruf" v-model="ruf">
+          {{ text.p_ruf }} <a href="#ruf" class="uk-icon-link" uk-icon="icon: question; ratio: .75" uk-toggle></a>
         </label>
+        <div id="ruf" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">{{ text.p_ruf }}</h2>
+                <hr>
+                <p>{{ text.p_ruf_tip }}</p>
+            </div>
+        </div>
         <div class="uk-form-controls">
             <input id="dmarc-ruf" class="uk-input" v-model="ruf" type="email" v-on:change="update" placeholder="dmarc-failure@example.com">
         </div>
     </div>
 
     <div class="uk-margin">
-        <label class="uk-form-label" for="dmarc-fo">{{ text.p_fo }}</label>
+        <label class="uk-form-label uk-text-bold" for="dmarc-fo">{{ text.p_fo }} <a href="#fo" class="uk-icon-link" uk-icon="icon: question; ratio: .75" uk-toggle></a></label>
+        <div id="fo" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">{{ text.p_fo }}</h2>
+                <hr>
+                <p>{{ text.p_fo_tip }}</p>
+                <ul>
+                    <li><span class="uk-text-bold">{{ text.p_fo_all }}:</span> {{ text.p_fo_all_tip }}</li>
+                    <li><span class="uk-text-bold">{{ text.p_fo_any }}:</span> {{ text.p_fo_any_tip }}</li>
+                    <li><span class="uk-text-bold">{{ text.p_fo_dkim }}:</span> {{ text.p_p_tip_reject }}</li>
+                    <li><span class="uk-text-bold">{{ text.p_fo_spf }}:</span> {{ text.p_p_tip_reject }}</li>
+                </ul>
+            </div>
+        </div>
         <div class="uk-form-controls">
             <label><input class="uk-checkbox" type="checkbox" v-model="fo" value="0" v-on:change="update" v-bind:disabled="ruf === ''"> {{ text.p_fo_all }}</label><br>
             <label><input class="uk-checkbox" type="checkbox" v-model="fo" value="1" v-on:change="update" v-bind:disabled="ruf === ''"> {{ text.p_fo_any }}</label><br>
@@ -173,7 +264,15 @@
     </div>
 
     <div class="uk-margin">
-        <label class="uk-form-label" for="dmarc-rf">{{ text.p_rf }}</label>
+        <label class="uk-form-label uk-text-bold" for="dmarc-rf">{{ text.p_rf }} <a href="#rf" class="uk-icon-link" uk-icon="icon: question; ratio: .75" uk-toggle></a></label>
+        <div id="rf" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <h2 class="uk-modal-title">{{ text.p_rf }}</h2>
+                <hr>
+                <p>{{ text.p_rf_tip }}</p>
+            </div>
+        </div>
         <div class="uk-form-controls">
             <label><input class="uk-checkbox" type="checkbox" v-model="rf" value="afrf" v-on:change="update" v-bind:disabled="ruf === ''"> <strong>AFRF</strong> &ndash; {{ text.p_rf_afrf }}</label><br>
             <label><input class="uk-checkbox" type="checkbox" v-model="rf" value="iodef" v-on:change="update" v-bind:disabled="ruf === ''"> <strong>IODEF</strong> &ndash; {{ text.p_rf_iodef }}</label><br>
@@ -181,7 +280,7 @@
     </div>
 
 </li>
-<li>
+<li class="uk-animation-fade">
     <div class="uk-margin">
         <p>{{ text.result }}</p>
 
