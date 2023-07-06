@@ -99,7 +99,7 @@ var app = new Vue({
                 this.rf.sort();
                 var rf = this.rf.join(',');
                 if (rf !== 'afrf' && this.rf.length > 0) {
-                    record += '; rf=' + this.rf.join(',');
+                    record += '; rf=' + this.rf.join(':');
                 }
             }
 
