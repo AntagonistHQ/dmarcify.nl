@@ -48,6 +48,7 @@
     "p_rf_tip": "Authentication Failure Reporting Format (AFRF) is a standard format for reporting spam via email.",
     "p_rf_afrf": "X-ARF format",
     "p_rf_iodef": "XML format",
+    "ruf_rua_warning": "The TXT record shown below is only valid for",
     "w_copy": "copy",
     "w_hour": "hour",
     "w_hours": "hours",

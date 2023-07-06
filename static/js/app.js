@@ -6,6 +6,7 @@ var app = new Vue({
         pct: 100,
         aspf: 'r',
         adkim: 'r',
+        reporting_domain: '',
         rua: '',
         ri: '86400',
         ruf: '',
@@ -108,8 +109,18 @@ var app = new Vue({
         showHelp: function(help) {
             this.help = help;
         },
+        update_reporting_domain: function(value) {
+            var match = /@(.+)$/.exec(value);
+            if (match) {
+                this.reporting_domain = match[1];
+            }
+        },
     },
     mounted: function() {
         this.translate(this.lang);
+    },
+    watch: {
+        ruf: 'update_reporting_domain',
+        rua: 'update_reporting_domain',
     },
 })
